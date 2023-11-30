@@ -1,8 +1,8 @@
 pipeline {
     agent any
-     environment{
-        dockerImage=''
-        registry='parzivaal/groovyapp1'
+      environment{
+        dockerImage = ''
+        registry = 'parzivaal/spring-jenkins-pipeline-groovy-demo1'
     }
    
 
@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git url: 'https://github.com/Parzvaal/spring-jenkins-pipeline-groovy-demo1.git'
+                git url: 'https://github.com/acer1999/spring-jenkins-pipeline-groovy-demo1.git'
 
                 // Run Maven on a Unix agent.
                 script{
@@ -46,18 +46,22 @@ pipeline {
             }
         
     	}
-    	stage('Build Docker Image'){
+    	
+    	
+    	
+    	
+    
+	 stage('Build docker image'){
             steps{
                 script{
-                    dockerImage=docker.build registry
+			dockerImage = docker.build registry
                 }
             }
         }
-    	
-    	
-    	
+
+	    
     }
-     post {
+	post {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 success {
